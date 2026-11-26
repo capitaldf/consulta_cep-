@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consulta de CEP</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            max-width: calc(100% - 40px);
+            margin: 60px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .resultado {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e9f5ff;
+            border-radius: 5px;
+        }
+
+        .erro {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffdddd;
+            color: #cc0000;
+            border-radius: 5px;
+        }
+
+        .resultado p {
+            margin: 10px 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Consulta de CEP</h1>
+
+        <!-- Formulário de consulta -->
+        <form action="/buscarcep" method="GET">
+
+            <label for="cep">Digite o CEP:</label>
+
+            <input
+                type="text"
+                id="cep"
+                name="cep"
+                placeholder="Ex: 01001000"
+                maxlength="9"
+                required
+            >
+
+            <button type="submit">Buscar</button>
+
+        </form>
+
+        <!-- Exibição de erros -->
+        {% if erro %}
+            <div class="erro">
+                {{ erro }}
+            </div>
+        {% endif %}
+
+        <!-- Exibição dos dados do endereço -->
+        {% if endereco %}
+
+            <div class="resultado">
+
+                <h2>Endereço encontrado</h2>
+
+                <p><strong>CEP:</strong>
+                    {{ endereco.cep }}
+                </p>
+
+                <p><strong>Logradouro:</strong>
+                    {{ endereco.logradouro }}
+                </p>
+
+                <p><strong>Complemento:</strong>
+                    {{ endereco.complemento }}
+                </p>
+
+                <p><strong>Bairro:</strong>
+                    {{ endereco.bairro }}
+                </p>
+
+                <p><strong>Cidade:</strong>
+                    {{ endereco.localidade }}
+                </p>
+
+                <p><strong>Estado:</strong>
+                    {{ endereco.estado }}
+                </p>
+
+                <p><strong>UF:</strong>
+                    {{ endereco.uf }}
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
+
+
+
+
